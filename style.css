@@ -1,3 +1,101 @@
-.heading{
-    color:red
+/* //header */
+.header{
+    background-color:#FF5200;
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+    color: white;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.logo{
+    width : 200px;
+}
+
+.nav-items{
+    padding: 0 20px; 
+}
+
+.nav-items > ul {
+    font-size: 24px;
+    display: flex;
+    list-style-type:none;
+}
+
+.nav-items > ul > li {
+     padding: 10px;
+     margin: 10px;
+}
+
+.login-btn{
+    cursor: pointer;
+}
+
+/* body  */
+.search{
+    padding: 10px;
+}
+ 
+/* //card and its container  */
+.res-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.res-card-img{
+    width: 100%;
+    border-radius: 15px 15px 0px 0px;
+    height: 186px;
+}
+.res-card{
+    margin: 15px;
+    padding: 5px;
+    width: 200px;
+    /* height: 350px; */
+    border-radius: 15px;
+}
+
+.res-card:hover{
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    /* border: 1px solid black; */
+    cursor: pointer;
+}
+
+.res-card > h4{
+    color:rgba(77, 77, 77, 0.902);
+}
+
+/* button */
+.filter-btn{
+    margin: 10px;
+    cursor: pointer;
+}
+.filter{
+    display: flex;
+}
+
+/* Shimmer UI Styling */
+.shimmer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.shimmer-card {
+    margin: 15px;
+    padding: 5px;
+    width: 200px;
+    height: 350px;
+    border-radius: 15px;
+    background-color: rgba(211, 211, 211, 0.197);
+    border: 1px solid gainsboro;
+    cursor: pointer;
+}
+
+.shimmer-image {
+    width:198px;
+    border-radius: 15px 15px 0px 0px;
+    height: 186px;
+    background-color: gainsboro;
 }
