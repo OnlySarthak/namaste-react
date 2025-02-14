@@ -45,13 +45,13 @@
 
 .res-card-img{
     width: 100%;
-    border-radius: 15px 15px 0px 0px;
+    border-radius: 15px 15px 15px 15px;
     height: 186px;
 }
 .res-card{
     margin: 15px;
     padding: 5px;
-    width: 200px;
+    width: 250px;
     /* height: 350px; */
     border-radius: 15px;
 }

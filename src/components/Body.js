@@ -1,14 +1,11 @@
 import RestuaurantCard from "./RestuaurantCard";
-import restaurantData from "../utils/mockData";
 import { useState,useEffect } from "react";
-import restaurantData from "../utils/mockData";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 let backUpData;
 
 const Body = ()=>{
-
-  console.log("rerendered");
   
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
 
@@ -16,7 +13,7 @@ const Body = ()=>{
 
   const [unfilter, setUnfilter] = useState(false);
 
-  let temp = "";
+  const [backUpData,setbackUpData] = useState([]);
   
   useEffect(()=>{
     fetchData();
@@ -27,24 +24,24 @@ const Body = ()=>{
     fetch('https://thingproxy.freeboard.io/fetch/https://swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999998&page_type=DESKTOP_WEB_LISTING');
     const json = await data.json();
     setListOfRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-    backUpData = json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+    setbackUpData(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
   }
 
 
   //conditional rendering
-  return listOfRestaurants.length === 0 ?
-    ( <Shimmer/> ) :
-    (
+  return listOfRestaurants === null ? <Shimmer/>
+  :(
       <div className="Body">
-        <div className="filter">
-          <div className="search">
+        <div className="filter container">
+          <div className="search d-flex">
 
-            <input type="text" className="search-box" value={searchText}
+            <input placeholder="Whats on your mind?" type="text" className="search-box form-control" value={searchText}
             onChange={(e)=>{
               setSearchText(e.target.value)
             }}/>
 
-            <button onClick={()=> {
+            <button className="btn btn-primary" 
+            onClick={()=> {
                const filterdData = backUpData.filter
                           ((res)=>res.info.name.toLowerCase().includes(searchText.toLowerCase()));              
                setListOfRestaurants(filterdData);
@@ -63,11 +60,13 @@ const Body = ()=>{
             )}
 
           </div>
-           <button className="filter-btn" onClick={()=>{
+           <button className="filter-btn btn btn-secondary " onClick={()=>{
                 const filterdData = backUpData.filter(
                   (res)=> res?.info?.avgRating > 4.5
                 )
                 setListOfRestaurants(filterdData);
+                console.log(filterdData);
+                
            }}>
             Top Rated Restuaurant
            </button>
@@ -75,7 +74,9 @@ const Body = ()=>{
         <div className="res-container">
         {
           listOfRestaurants.map((card) => (
-            <RestuaurantCard key={card.info.id} resData={card} />
+            <Link to={"/restaurant/" + card.info.id }  key={card.info.id} >
+              <RestuaurantCard resData={card} />
+            </Link>
           ))
         }  
         </div>
