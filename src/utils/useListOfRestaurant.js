@@ -17,7 +17,7 @@ const useListOfRestaurant = ()=>{
         setbackUpData(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     }
 
-    return {listOfRestaurants, backUpData};
+    return {listOfRestaurants , setListOfRestaurants, backUpData};
 }
 
 export default useListOfRestaurant;

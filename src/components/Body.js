@@ -1,5 +1,5 @@
 import RestuaurantCard from "./RestuaurantCard";
-import { useState,useEffect } from "react";
+import { useState} from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useListOfRestaurant from "../utils/useListOfRestaurant";
@@ -10,7 +10,7 @@ const Body = ()=>{
   
   const [unfilter, setUnfilter] = useState(false);
   
-  const {listOfRestaurants, backUpData} = useListOfRestaurant();
+  const {listOfRestaurants, setListOfRestaurants, backUpData} = useListOfRestaurant();
 
   //conditional rendering
   return listOfRestaurants.length == 0 ?  <Shimmer/> : (
@@ -27,12 +27,17 @@ const Body = ()=>{
             onClick={()=> {
                const filterdData = backUpData.filter
                           ((res)=>res.info.name.toLowerCase().includes(searchText.toLowerCase()));              
-               setListOfRestaurants(filterdData);
-               setUnfilter(true)
+
+              if(filterdData.length != 0){
+                setUnfilter(true)
+                setListOfRestaurants(filterdData);
+              }
+                              
             }}>search</button>
 
             {unfilter && (
                 <button 
+                className="btn btn-primary"
                 style={{marginLeft: 5 + 'px'}}
                 onClick={()=>{
                   setUnfilter(false);
