@@ -2,35 +2,18 @@ import RestuaurantCard from "./RestuaurantCard";
 import { useState,useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
-
-let backUpData;
+import useListOfRestaurant from "../utils/useListOfRestaurant";
 
 const Body = ()=>{
-  
-  const [listOfRestaurants, setListOfRestaurants] = useState([]);
 
   const [searchText, setSearchText] = useState('');
-
+  
   const [unfilter, setUnfilter] = useState(false);
-
-  const [backUpData,setbackUpData] = useState([]);
   
-  useEffect(()=>{
-    fetchData();
-  },[]);
-  
-  async function fetchData() {
-    const data = await 
-    fetch('https://thingproxy.freeboard.io/fetch/https://swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999998&page_type=DESKTOP_WEB_LISTING');
-    const json = await data.json();
-    setListOfRestaurants(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-    setbackUpData(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
-  }
-
+  const {listOfRestaurants, backUpData} = useListOfRestaurant();
 
   //conditional rendering
-  return listOfRestaurants === null ? <Shimmer/>
-  :(
+  return listOfRestaurants.length == 0 ?  <Shimmer/> : (
       <div className="Body">
         <div className="filter container">
           <div className="search d-flex">
@@ -74,7 +57,7 @@ const Body = ()=>{
         <div className="res-container">
         {
           listOfRestaurants.map((card) => (
-            <Link to={"/restaurant/" + card.info.id }  key={card.info.id} >
+            <Link to={"/restaurant/" + card.info.id }  key={card.info.id} style={{ textDecoration: "none", color: "inherit" }}>
               <RestuaurantCard resData={card} />
             </Link>
           ))
