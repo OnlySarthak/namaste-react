@@ -1,6 +1,8 @@
-const RestuaurantCard = ({ resData }) => {
+const RestuaurantCard = ({ resData, temp }) => {
   const { name, cuisines, avgRating, cloudinaryImageId, sla } = resData.info;
 
+  console.log(temp);
+  
    // Correct Swiggy Cloudinary Image URL
    const imageUrl = `https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320/${cloudinaryImageId}`; // Placeholder if no image
 
@@ -12,13 +14,24 @@ const RestuaurantCard = ({ resData }) => {
         src={imageUrl}
         alt={name}
       />
-      <h3>{name}</h3>
-      <h4>{cuisines.join(", ")}</h4>
-      <hr />
-      <h4>{avgRating} stars</h4>
-      <h4>{sla.deliveryTime || "N/A"} minutes</h4>
+      <div className="res-info">
+        <p className="res-title">{name}</p>
+        <div className="re-card-rating-n-Time">
+          <img src="https://img.icons8.com/external-others-inmotus-design/67/external-Star-round-icons-others-inmotus-design-4.png" alt="external-Star-round-icons-others-inmotus-design-4"/>
+          <p>{avgRating} • {sla.deliveryTime || "N/A"} minutes</p>
+        </div>
+        <p>{cuisines.join(", ")}</p>
+      </div>
     </div>
   );
 };
+
+export const HOC = (Card)=>{
+  return (prop2)=>{
+    return (
+      <Card {...prop2}/>
+    )
+  }
+}
 
 export default RestuaurantCard;

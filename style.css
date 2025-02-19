@@ -1,5 +1,6 @@
 /* //header */
 .header{
+    padding: 0 54px;
     background-color:#FF5200;
     display: flex;
     justify-content: space-between;
@@ -41,29 +42,54 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-top: 14px;
 }
 
-.res-card-img{
-    width: 100%;
+.res-card-img{  
+    width: 280px;
     border-radius: 15px 15px 15px 15px;
     height: 186px;
 }
 .res-card{
-    margin: 15px;
-    padding: 5px;
-    width: 250px;
-    height: 470px;
     border-radius: 15px;
+    width: 280px;
+    height: 343px;
+    margin: 3px 17px;
 }
 
 .res-card:hover{
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    /* border: 1px solid black; */
     cursor: pointer;
 }
 
-.res-card > h4{
-    color:rgba(77, 77, 77, 0.902);
+.res-card > div > p{
+    margin: 0 0;
+}
+
+.res-info{
+    margin: 3px 14px;
+}
+
+.res-title{
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.re-card-rating-n-Time{
+    display: flex;
+    padding: 0;
+    justify-items: start;
+    margin: 0;
+}
+
+.re-card-rating-n-Time p{
+    margin: 0;
+    font-weight: 500;
+}
+.re-card-rating-n-Time img{
+    width: 25px;
+    height: 25px;
+    margin: 0 5px 0 0;
 }
 
 /* button */

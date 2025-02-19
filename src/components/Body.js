@@ -1,10 +1,12 @@
-import RestuaurantCard from "./RestuaurantCard";
+import RestuaurantCard,{HOC} from "./RestuaurantCard";
 import { useState} from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useListOfRestaurant from "../utils/useListOfRestaurant";
 
 const Body = ()=>{
+
+  const PromotedRestaurantCard = HOC(RestuaurantCard);
 
   const [searchText, setSearchText] = useState('');
   
@@ -63,7 +65,7 @@ const Body = ()=>{
         {
           listOfRestaurants.map((card) => (
             <Link to={"/restaurant/" + card.info.id }  key={card.info.id} style={{ textDecoration: "none", color: "inherit" }}>
-              <RestuaurantCard resData={card} />
+              <PromotedRestaurantCard resData={card} temp={1}/>
             </Link>
           ))
         }  

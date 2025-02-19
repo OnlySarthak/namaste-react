@@ -1,6 +1,7 @@
 import Shimmer from './Shimmer';
 import { useParams } from "react-router-dom";
 import useRestaurantMenu from '../utils/useRestaurantMenu';
+import RestaurantCategory from './RestaurantCategory';
 
 const RestaurantMenu = ()=>{
     const {resId} = useParams(); 
@@ -21,7 +22,13 @@ const RestaurantMenu = ()=>{
     } = resInfo?.data?.cards?.[2]?.card?.card?.info || {};
     //data for menu's
     const { itemCards } = resInfo?.data?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.[1]?.card?.card || {};
-
+    // const { itemCards } = resInfo?.data?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards || {};
+    const category = ( resInfo?.data?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
+        (c) => (c.card.card["@type"] == "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory")
+      )) ?? [];
+      
+    // console.log(category);
+    
 
     return resInfo === null ? <Shimmer/> 
     : (
@@ -31,9 +38,13 @@ const RestaurantMenu = ()=>{
             <div className="card" style={{marginTop:"40"+"px"}}>
                 <div className="card-body">
                     <div className="card-title">
+                    <div className="re-card-rating-n-Time">
+                        <img src="https://img.icons8.com/external-others-inmotus-design/67/external-Star-round-icons-others-inmotus-design-4.png" alt="external-Star-round-icons-others-inmotus-design-4"/>
                         <h4>    
-                            {avgRating} {totalRatingsString} - {costForTwoMessage}
+                            {avgRating} {totalRatingsString} • {costForTwoMessage}
                         </h4>
+                    </div>
+                        
                     </div>
                     <a href="#" className="card-link">{cuisines?.[0]}</a>
                     <a href="#" className="card-link">{cuisines?.[1]}</a>
@@ -55,19 +66,11 @@ const RestaurantMenu = ()=>{
             </div>
 
             <div className="Regular" style={{marginTop:"40"+"px"}}>
-                <h4>Recomanded - {itemCards.length}</h4>
-                <hr></hr>
-                <div>
-                    {itemCards.map((item) => (
-                        <div key={item?.card?.info?.id}>
-                            <h5>{item?.card?.info?.name}</h5>
-                            <p>₹{(item?.card?.info?.defaultPrice)/100}</p>
-                            <h6>{item?.card?.info?.description}</h6>
-                            <hr></hr>
-                        </div>
-                    ))}
-                </div>
-
+                    {category.length > 0 ? (
+                    <RestaurantCategory category={category} />
+                    ) : (
+                    <p>No categories available.</p>
+                    )}
             </div>
         </div>
     )
