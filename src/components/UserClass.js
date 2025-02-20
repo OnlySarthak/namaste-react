@@ -1,5 +1,5 @@
 import { Component } from "react";
-import Users from "./User";
+import UserContext from "../utils/UserContext";
 
 class UserClass extends Component{
     constructor(props){
@@ -27,6 +27,12 @@ class UserClass extends Component{
         const {name} = this.state;
         return (
             <div className="UserCard card">
+                <UserContext.Consumer>
+                    {(object)=>{
+                        console.log(object)
+                        console.log(object.loggedUser)
+                    }}
+                </UserContext.Consumer>
                 <h2>Name : {name}</h2>
                 <h3>Address : Nashik</h3>
                 <h4>Contact : xyz@gmail.com</h4>

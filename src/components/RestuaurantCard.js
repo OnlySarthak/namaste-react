@@ -1,7 +1,5 @@
-const RestuaurantCard = ({ resData, temp }) => {
+const RestuaurantCard = ({ resData}) => {
   const { name, cuisines, avgRating, cloudinaryImageId, sla } = resData.info;
-
-  console.log(temp);
   
    // Correct Swiggy Cloudinary Image URL
    const imageUrl = `https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320/${cloudinaryImageId}`; // Placeholder if no image

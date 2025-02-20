@@ -1,10 +1,11 @@
 import RestuaurantCard,{HOC} from "./RestuaurantCard";
-import { useState} from "react";
+import { useContext, useState} from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useListOfRestaurant from "../utils/useListOfRestaurant";
+import UserContext from "../utils/UserContext";
 
-const Body = ()=>{
+const Body = ()=>{  
 
   const PromotedRestaurantCard = HOC(RestuaurantCard);
 
@@ -19,7 +20,6 @@ const Body = ()=>{
       <div className="Body">
         <div className="filter container">
           <div className="search d-flex">
-
             <input placeholder="Whats on your mind?" type="text" className="search-box form-control" value={searchText}
             onChange={(e)=>{
               setSearchText(e.target.value)
@@ -55,8 +55,6 @@ const Body = ()=>{
                   (res)=> res?.info?.avgRating > 4.5
                 )
                 setListOfRestaurants(filterdData);
-                console.log(filterdData);
-                
            }}>
             Top Rated Restuaurant
            </button>
@@ -65,7 +63,7 @@ const Body = ()=>{
         {
           listOfRestaurants.map((card) => (
             <Link to={"/restaurant/" + card.info.id }  key={card.info.id} style={{ textDecoration: "none", color: "inherit" }}>
-              <PromotedRestaurantCard resData={card} temp={1}/>
+              <PromotedRestaurantCard resData={card}/>
             </Link>
           ))
         }  
