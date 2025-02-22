@@ -15,7 +15,6 @@ const useListOfRestaurant = () => {
         const fetchLocationData = async () => {
             try {
                 const obj = await getLatLng(FinalUserLocation);
-                console.log("Fetched Lat/Lng:", obj);
 
                 if (!obj.lat || !obj.lng) return;
 

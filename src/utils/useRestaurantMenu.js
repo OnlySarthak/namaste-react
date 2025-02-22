@@ -14,7 +14,6 @@ const useRestaurantMenu = (resId) => {
         const fetchLatLng = async () => {
             try {
                 const obj = await getLatLng(location);
-                console.log("Fetched Lat/Lng:", obj);
 
                 if (!obj.lat || !obj.lng) return;
 

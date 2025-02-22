@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider,Outlet } from "react-router-dom";
-import React, { lazy, useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -8,6 +8,9 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import UserContext from "./utils/UserContext";
 import RestaurantMenu from './components/RestaurantMenu';
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+import Cart from "./components/Cart";
 
 // const RestaurantMenu = lazy(()=>import('./components/RestaurantMenu'));
  
@@ -15,18 +18,19 @@ const AppLayout = ()=>{
     const [userLocation, setUserLocation] = useState();
     const {loggedUser} = useContext(UserContext);
 
-
     return (
-        <div className="app">
-            <UserContext.Provider value={{
-                userLocation,
-                setUserLocation,
-                loggedUser
-            }}>
-                <Header/>
-                <Outlet />
-            </UserContext.Provider>
-        </div>
+        <Provider store={appStore}>
+            <div className="app">
+                <UserContext.Provider value={{
+                    userLocation,
+                    setUserLocation,
+                    loggedUser
+                }}>
+                    <Header/>
+                    <Outlet />
+                </UserContext.Provider>
+            </div>
+        </Provider>
     )
 };
 
@@ -46,6 +50,10 @@ const appRouter = createBrowserRouter([
             {
                 path:'/contact',
                 element: <Contact/>
+            },
+            {
+                path:'/cart',
+                element: <Cart/>
             },
             {
                 path: '/restaurant/:resId',

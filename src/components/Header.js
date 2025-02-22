@@ -1,12 +1,17 @@
 import logo from '../utils/logo.png';  // Adjust path if needed
 import { useState,useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Links } from 'react-router-dom';
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from '../utils/UserContext';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
+
+  const cartItems = useSelector((state) => state.cart.items);
+  console.log(cartItems);
   
-  const {loggedUser,userLocation, setUserLocation} = useContext(UserContext); 
+  
+  const {setUserLocation} = useContext(UserContext); 
 
   const [login, setLogin] = useState('Log In');
 
@@ -70,10 +75,16 @@ const Header = () => {
            style={{ textDecoration: "none", color: "inherit" }}
            >Contact</Link>
           </li>
-          <li>Card</li>
+          <li>
+            <Link to='/cart'
+           style={{ textDecoration: "none", color: "inherit" }}
+              >
+                Cart : ( {cartItems.length} items )
+            </Link> 
+          </li>
           <li className='login-btn' onClick={()=>{
             login === 'Log In' ? setLogin("Log Out") : setLogin('Log In');
-          }}>{login} : {loggedUser}</li>
+          }}>{login}</li>
         </ul>
       </div>
     </div>
