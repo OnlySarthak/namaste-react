@@ -35,7 +35,7 @@ const RestaurantMenu = ()=>{
         <div className="menu container">
             <p style={{marginTop:"40"+"px"}}>home / {city} / {name}</p>
             <h1>{name}</h1>
-            <div className="card" style={{marginTop:"40"+"px"}}>
+            <div className="card" style={{marginTop:"40"+"px",zIndex:0}}>
                 <div className="card-body">
                     <div className="card-title">
                     <div className="re-card-rating-n-Time">
